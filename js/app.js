@@ -25,11 +25,21 @@ Enemy.prototype.update = function(dt) {
     }
 
     // if any collision, player must return start position
-    if ((this.x > player.x - 45 && this.x < player.x + 45) && (this.y > player.y - 45 && this.y < player.y + 45)) {
+    if (collides(this, player)) {
         player.x = 200;
         player.y = 380;
     }
 };
+
+function collides(enemy, player)
+{
+    if (enemy.x < player.x + 45 &&
+        enemy.x + 50 > player.x &&
+        enemy.y < player.y + 30 &&
+        enemy.y + 25 > player.y) 
+        return true;
+    return false;
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
